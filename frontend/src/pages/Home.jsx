@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row"
 import Product from "../components/Product"
 import Col from "react-bootstrap/Col"
 import Cart from "../components/Cart"
+import RegisterProduct from "../components/RegisterProduct"
 
 function Home() {
   const [products, setProducts] = useState([])
@@ -31,6 +32,7 @@ function Home() {
           <Col sm={8}>
             <Row>
               <p>Nuevo párrafo</p>
+              <RegisterProduct />
               {products.map((product) => (
                 <Product key={product._id} product={product} />
               ))}
