@@ -5,14 +5,15 @@ import Row from "react-bootstrap/Row"
 import Product from "../components/Product"
 import Col from "react-bootstrap/Col"
 import Cart from "../components/Cart"
-import RegisterProduct from "../components/RegisterProduct"
+//import RegisterProduct from "../components/RegisterProduct"
+//import FormPay from "../components/FormPay"
 
 function Home() {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
     async function loadProducts() {
-      const result = await fetch(`${import.meta.env.VITE_BASE_URL}/products`)
+      const result = await fetch(`http://localhost:3001/api/products`)
       const data = await result.json()
       setProducts(data)
     }
@@ -32,7 +33,8 @@ function Home() {
           <Col sm={8}>
             <Row>
               <p>Nuevo párrafo</p>
-              <RegisterProduct />
+              {/*<RegisterProduct />*/}
+              {/*<FormPay />*/}
               {products.map((product) => (
                 <Product key={product._id} product={product} />
               ))}

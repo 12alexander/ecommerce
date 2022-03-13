@@ -7,7 +7,8 @@ const RegisterProduct = () => {
     e.preventDefault()
     fetch("http://localhost:3001/api/products", {
       method: "POST",
-      headers: { "Content-Type": "application/json", body: JSON.stringify(data) },
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
     })
       .then((result) => result.json())
       .then((data) => console.log(data))

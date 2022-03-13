@@ -1,15 +1,25 @@
 import { Button } from "react-bootstrap"
 import Card from "react-bootstrap/Card"
 import ListGroup from "react-bootstrap/ListGroup"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { useState } from "react"
+import FormPay from "./FormPay"
 
 function Cart() {
+  const dispatch = useDispatch()
+  const [show, setShow] = useState(false)
+
+  const handleClose = () => setShow(false)
+
   const products = useSelector((state) => state.cart)
 
   const total = products.reduce((sum, p) => sum + p.price, 0)
-
+  /*
   async function pay() {
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/orders`, {
+    products.map((p) => console.log(`hola que hace ${p._id}`))
+    console.log(`hola que hace ${products}`)
+
+    const response = await fetch(`http://localhost:3001/api/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,6 +29,13 @@ function Cart() {
 
     const data = response.json()
     alert("Orden creada!")
+  }*/
+  async function pay() {
+    setShow(true)
+  }
+
+  function deleteProduct(id) {
+    dispatch({ type: "REMOVE_PRODUCT", payload: id })
   }
 
   return (
@@ -44,6 +61,7 @@ function Cart() {
           ) : null}
         </ListGroup.Item>
       </ListGroup>
+      {show && <FormPay show={show} handleClose={handleClose} total={total} />}
     </Card>
   )
 }
